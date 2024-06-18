@@ -9,14 +9,16 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({
+			update_focused_file = { enable = true },
 			event_handlers = {
-				{
-					event = "file_opened",
-					handler = function()
-						vim.cmd("Neotree close")
-					end,
-				},
+				-- {
+				-- 	event = "file_opened",
+				-- 	handler = function()
+				-- 		vim.cmd("Neotree close")
+				-- 	end,
+				-- },
 			},
+
 			close_if_last_window = true,
 			popup_border_style = "rounded",
 			enable_git_status = true,
@@ -171,6 +173,8 @@ return {
 				},
 				nesting_rules = {},
 				filesystem = {
+					update_focused_file = { enable = true },
+					buffers = { follow_current_file = { enable = true }, leave_dirs_open = false },
 					filtered_items = {
 						visible = false, -- when true, they will just be displayed differently than normal items
 						hide_dotfiles = false,

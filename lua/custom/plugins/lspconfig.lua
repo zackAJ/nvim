@@ -155,8 +155,7 @@ return { -- LSP Configuration & Plugins
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
-			tailwindcss = {},
-			-- intelephense = { cmd = { "intelephense", "--stdio" }, filetypes = { "php" } },
+			tailwindcss = { filetypes = { "html", "blade", "vue" } },
 			-- phpactor = {
 			-- 	capabilities = capabilities,
 			-- 	default_config = {
@@ -175,19 +174,22 @@ return { -- LSP Configuration & Plugins
 			-- 		language_server_psalm = { enabled = false },
 			-- 	},
 			-- },
-			-- phpactor = {
-			-- 	-- cmd = { "phpactor", "language-server" },
-			-- 	-- filetypes = { "php" },
-			-- 	settings = {
-			-- 		phpactor = {
-			-- 			inlayHints = {
-			-- 				enable = true,
-			-- 				parameterHints = true,
-			-- 				typeHints = true,
-			-- 			},
-			-- 		},
-			-- 	},
-			-- },
+			phpactor = {
+				cmd = { "phpactor", "language-server", "-vvv" },
+				filetypes = { "php" },
+				settings = {
+					phpactor = {
+						language_server_phpstan = { enabled = false },
+						language_server_psalm = { enabled = false },
+						inlayHints = {
+							enable = true,
+							parameterHints = true,
+							typeHints = true,
+						},
+					},
+				},
+			},
+			-- intelephense = { cmd = { "intelephense", "--stdio" }, filetypes = { "php" } },
 			tsserver = {
 				init_options = {
 					plugins = {
