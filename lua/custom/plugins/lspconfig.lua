@@ -15,25 +15,9 @@ return { -- LSP Configuration & Plugins
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- Brief aside: **What is LSP?**
-		--
-		-- LSP is an initialism you've probably heard, but might not understand what it is.
-		--
-		-- LSP stands for Language Server Protocol. It's a protocol that helps editors
-		-- and language tooling communicate in a standardized fashion.
-		--
-		-- In general, you have a "server" which is some tool built to understand a particular
-		-- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-		-- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-		-- processes that communicate with some "client" - in this case, Neovim!
-		--
-		-- LSP provides Neovim with features like:
-		--  - Go to definition
-		--  - Find references
-		--  - Autocompletion
-		--  - Symbol Search
-		--  - and more!
-		--
+		--NOTE: disposable and sus
+		local lsp_zero = require("lsp-zero")
+		lsp_zero.extend_lspconfig()
 		-- Thus, Language Servers are external tools that must be installed separately from
 		-- Neovim. This is where `mason` and related plugins come into play.
 		--
@@ -154,7 +138,28 @@ return { -- LSP Configuration & Plugins
 		--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 		--  - settings (table): Override the default settings passed when initializing the server.
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+		local lspconfig = require("lspconfig")
 		local servers = {
+
+			-- emmet_ls = {
+			-- 	filetypes = {
+			-- 		"astro",
+			-- 		"blade",
+			-- 		"css",
+			-- 		"eruby",
+			-- 		"html",
+			-- 		"htmldjango",
+			-- 		"javascriptreact",
+			-- 		"less",
+			-- 		"pug",
+			-- 		"sass",
+			-- 		"scss",
+			-- 		"svelte",
+			-- 		"typescriptreact",
+			-- 		"vue",
+			-- 	},
+			-- },
+			--
 			tailwindcss = { filetypes = { "html", "blade", "vue" } },
 			-- phpactor = {
 			-- 	capabilities = capabilities,
@@ -189,17 +194,22 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 			},
-			-- intelephense = { cmd = { "intelephense", "--stdio" }, filetypes = { "php" } },
+			intelephense = {
+				settings = { php = { completion = { callSnippet = "Replace" } } },
+				cmd = { "intelephense", "--stdio" },
+				filetypes = { "php" },
+			},
 			tsserver = {
-				init_options = {
-					plugins = {
-						{
-							name = "@vue/typescript-plugin",
-							location = vue_language_server_path,
-							languages = { "vue" },
-						},
-					},
-				},
+				-- init_options = {
+				-- 	plugins = {
+				-- 		{
+				-- 			name = "@vue/typescript-plugin",
+				-- 			-- TODO: install vue typescript plugin
+				-- 			location = vue_language_server_path,
+				-- 			languages = { "vue" },
+				-- 		},
+				-- 	},
+				-- },
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			},
 			volar = {
@@ -210,19 +220,7 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 			},
-			-- clangd = {},
-			-- gopls = {},
-			-- pyright = {},
-			-- rust_analyzer = {},
-			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 			--
-			-- Some languages (like typescript) have entire language plugins that can be useful:
-			--    https://github.com/pmizio/typescript-tools.nvim
-			--
-			-- But for many setups, the LSP (`tsserver`) will work just fine
-			-- tsserver = {},
-			--
-
 			lua_ls = {
 				-- cmd = {...},
 				-- filetypes = { ...},

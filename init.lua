@@ -135,6 +135,9 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
+-- Disable folding
+vim.opt.foldenable = false
+
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -204,6 +207,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	callback = function()
+		if require("nvim-treesitter.parsers").has_parser() then
+			vim.opt.foldmethod = "expr"
+			vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		else
+			vim.opt.foldmethod = "syntax"
+		end
+	end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -237,5 +251,26 @@ require("lazy").setup({
 		icons = {},
 	},
 })
+
+-- TODO require("modules.fold")
+-- vim.opt.foldtext = "v:lua.treesitter.foldtext()"
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.blade = {
+	install_info = {
+		url = "https://github.com/EmranMR/tree-sitter-blade",
+		files = { "src/parser.c" },
+		branch = "main",
+	},
+	filetype = "blade",
+}
+vim.filetype.add({
+	jkttern = {
+		[".*%.blade%.php"] = "blade",
+	},
+})
+
+local lsp_config = require("lspconfig.configs")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
