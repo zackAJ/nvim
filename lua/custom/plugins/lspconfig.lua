@@ -199,19 +199,19 @@ return { -- LSP Configuration & Plugins
 				cmd = { "intelephense", "--stdio" },
 				filetypes = { "php" },
 			},
-			tsserver = {
-				-- init_options = {
-				-- 	plugins = {
-				-- 		{
-				-- 			name = "@vue/typescript-plugin",
-				-- 			-- TODO: install vue typescript plugin
-				-- 			location = vue_language_server_path,
-				-- 			languages = { "vue" },
-				-- 		},
-				-- 	},
-				-- },
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-			},
+			-- tsserver = {
+			-- init_options = {
+			-- 	plugins = {
+			-- 		{
+			-- 			name = "@vue/typescript-plugin",
+			-- 			-- TODO: install vue typescript plugin
+			-- 			location = vue_language_server_path,
+			-- 			languages = { "vue" },
+			-- 		},
+			-- 	},
+			-- },
+			-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+			-- },
 			volar = {
 				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 				init_options = {
