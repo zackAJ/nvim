@@ -27,10 +27,20 @@ return {
 			sort_case_insensitive = false,
 			-- this sorts files and directories descendantly
 			sort_function = function(a, b)
+				if a.name and b.name then
+					local a_is_hidden = a.name:sub(1, 1) == "."
+					local b_is_hidden = b.name:sub(1, 1) == "."
+
+					if a_is_hidden and not b_is_hidden then
+						return false
+					elseif not a_is_hidden and b_is_hidden then
+						return true
+					end
+				end
 				if a.type == b.type then
-					return a.path > b.path
+					return a.path < b.path
 				else
-					return a.type > b.type
+					return a.type < b.type
 				end
 			end,
 			filesystem = {
@@ -52,6 +62,7 @@ return {
 						--".gitignored",
 					},
 					never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+						".git",
 						--".DS_Store",
 						--"thumbs.db"
 					},
