@@ -1,4 +1,4 @@
-local notificationIcon = "🔔 "
+local notificationIcon = "󰂛 "
 
 return {
 	-- components
@@ -39,6 +39,13 @@ return {
 		{
 			-- notifications
 			"rcarriga/nvim-notify",
+			config = function()
+				require("notify").setup({
+					render = "compact",
+					timeout = 2000,
+					top_down = false,
+				})
+			end,
 			keys = {
 				{
 					"<leader>dn",
