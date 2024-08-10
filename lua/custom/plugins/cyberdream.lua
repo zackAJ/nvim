@@ -37,6 +37,10 @@ return {
 					return {
 						Comment = { fg = colors.grey, bg = "NONE", italic = true },
 						["@property"] = { fg = colors.pink, bold = true },
+						LineNrAbove = { fg = colors.cyan },
+						LineNr = { fg = colors.green },
+						LineNrBelow = { fg = colors.cyan },
+						GitSignsCurrentLineBlame = { fg = colors.cyan },
 					}
 				end,
 

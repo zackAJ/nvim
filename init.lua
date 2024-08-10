@@ -276,9 +276,4 @@ vim.filetype.add({
 
 local lsp_config = require("lspconfig.configs")
 
-local colors = require("cyberdream.colors").default
-vim.api.nvim_set_hl(0, "LineNrAbove", { fg = colors.cyan })
-vim.api.nvim_set_hl(0, "LineNr", { fg = colors.green })
-vim.api.nvim_set_hl(0, "LineNrBelow", { fg = colors.cyan })
-vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { fg = colors.cyan })
 -- The line beneath this is called `modeline`. See `:help modeline`
