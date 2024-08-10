@@ -122,10 +122,6 @@ return { -- LSP Configuration & Plugins
 			end,
 		})
 
-		-- LSP servers and clients are able to communicate to each other what features they support.
-		--  By default, Neovim doesn't support everything that is in the LSP specification.
-		--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-		--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
@@ -161,26 +157,20 @@ return { -- LSP Configuration & Plugins
 			-- },
 			--
 			tailwindcss = { filetypes = { "html", "blade", "vue" } },
-			-- phpactor = {
-			-- 	capabilities = capabilities,
-			-- 	default_config = {
-			-- 		cmd = { "phpactor", "language-server", "-vvv" },
-			-- 		filetypes = { "php" },
-			-- 		root_dir = function()
-			-- 			return vim.fn.expand("%:p:h")
-			-- 		end,
-			-- 	},
-			-- },
-			-- cmd = { "phpactor", "language-server" },
-			-- filetypes = { "php" },
-			-- settings = {
-			-- 	phpactor = {
-			-- 		language_server_phpstan = { enabled = false },
-			-- 		language_server_psalm = { enabled = false },
-			-- 	},
-			-- },
 			phpactor = {
 				cmd = { "phpactor", "language-server", "-vvv" },
+				on_attach = function(client)
+					client.server_capabilities.hoverProvider = false
+					client.server_capabilities.documentSymbolProvider = false
+					client.server_capabilities.referencesProvider = false
+					client.server_capabilities.completionProvider = false
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.definitionProvider = false
+					client.server_capabilities.implementationProvider = true
+					client.server_capabilities.typeDefinitionProvider = false
+					client.server_capabilities.diagnosticProvider = false
+					--
+				end,
 				filetypes = { "php" },
 				settings = {
 					phpactor = {
@@ -195,6 +185,9 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 			intelephense = {
+				on_attach = function(client)
+					client.server_capabilities.workspaceSymbolProvider = false
+				end,
 				settings = { php = { completion = { callSnippet = "Replace" } } },
 				cmd = { "intelephense", "--stdio" },
 				filetypes = { "php" },
@@ -220,9 +213,6 @@ return { -- LSP Configuration & Plugins
 			volar = {},
 			--
 			lua_ls = {
-				-- cmd = {...},
-				-- filetypes = { ...},
-				-- capabilities = {},
 				settings = {
 					Lua = {
 						completion = {

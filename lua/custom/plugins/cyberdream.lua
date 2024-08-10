@@ -4,54 +4,29 @@ return {
 	priority = 1000,
 	config = function()
 		require("cyberdream").setup({
-			-- Enable transparent background
 			transparent = true,
-
-			-- Enable italics comments
 			italic_comments = false,
-
-			-- Replace all fillchars with ' ' for the ultimate clean look
-			hide_fillchars = false,
-
-			-- Modern borderless telescope theme
+			hide_fillchars = true,
+			-- Modern borderless telescope theme, also gives you transparent telescope
 			borderless_telescope = false,
-
-			-- Set terminal colors used in `:terminal`
 			terminal_colors = true,
-
 			theme = {
-				variant = "default", -- use "light" for the light variant
-				highlights = {
-					-- Highlight groups to override, adding new groups is also possible
-					-- See `:h highlight-groups` for a list of highlight groups or run `:hi` to see all groups and their current values
-
-					-- Example:
-					Comment = { fg = "#696969", bg = "NONE", italic = true },
-
+				variant = "default", --"light"
+				highlights = { -- See `:h highlight-groups` `:hi`
 					-- Complete list can be found in `lua/cyberdream/theme.lua`
 				},
-
-				-- Override a highlight group entirely using the color palette
 				overrides = function(colors) -- NOTE: This function nullifies the `highlights` option
-					-- Example:
 					return {
 						Comment = { fg = colors.grey, bg = "NONE", italic = true },
 						["@property"] = { fg = colors.pink, bold = true },
 						LineNrAbove = { fg = colors.cyan },
-						LineNr = { fg = colors.green },
+						LineNr = { fg = colors.red },
 						LineNrBelow = { fg = colors.cyan },
 						GitSignsCurrentLineBlame = { fg = colors.cyan },
 					}
 				end,
-
 				-- Override a color entirely
-				colors = {
-					-- For a list of colors see `lua/cyberdream/colours.lua`
-					-- Example:
-					bg = "#000000",
-					green = "#00ff00",
-					magenta = "#ff00ff",
-				},
+				colors = {},
 			},
 			extensions = {
 				alpha = true,
