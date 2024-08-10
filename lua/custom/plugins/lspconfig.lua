@@ -206,26 +206,18 @@ return { -- LSP Configuration & Plugins
 					},
 				},
 				init_options = {
-
-					-- plugins = {
-					-- 	{
-					-- 		name = "@vue/typescript-plugin",
-					-- 		-- TODO: install vue typescript plugin
-					-- 		-- location = vue_language_server_path,
-					-- 		languages = { "vue" },
-					-- 	},
-					-- },
-				},
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-			},
-			volar = {
-				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-				init_options = {
-					vue = {
-						hybridMode = false,
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = require("mason-registry").get_package("vue-language-server"):get_install_path()
+								.. "/node_modules/@vue/language-server",
+							languages = { "vue" },
+						},
 					},
 				},
+				filetypes = { "typescript", "vue", "javascript", "javascriptreact", "typescriptreact" },
 			},
+			volar = {},
 			--
 			lua_ls = {
 				-- cmd = {...},
