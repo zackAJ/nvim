@@ -12,7 +12,16 @@ return {
 	--    require('Comment').setup({})
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+			require("which-key").add({
+				{ "gb", group = "Comment blockwise" },
+				{ "gbc", group = "Comment toggle current block" },
+			})
+		end,
+	},
 
 	-- Here is a more advanced example where we pass configuration
 	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
