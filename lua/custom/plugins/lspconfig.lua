@@ -55,7 +55,7 @@ return { -- LSP Configuration & Plugins
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+				map("gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
@@ -63,7 +63,13 @@ return { -- LSP Configuration & Plugins
 
 				-- Fuzzy find all the symbols in your current workspace.
 				--  Similar to document symbols, except searches over your entire project.
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map(
+					"<leader>dws",
+					require("telescope.builtin").lsp_dynamic_workspace_symbols,
+					"[D]ynamic [W]orkspace [S]ymbols"
+				)
+
+				map("<leader>ws", require("telescope.builtin").lsp_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- Rename the variable under your cursor.
 				--  Most Language Servers support renaming across files, etc.
@@ -161,6 +167,7 @@ return { -- LSP Configuration & Plugins
 				cmd = { "phpactor", "language-server", "-vvv" },
 				on_attach = function(client)
 					client.server_capabilities.hoverProvider = false
+					client.server_capabilities.workspaceSymbolProvider = false
 					client.server_capabilities.documentSymbolProvider = false
 					client.server_capabilities.referencesProvider = false
 					client.server_capabilities.completionProvider = false
@@ -186,7 +193,7 @@ return { -- LSP Configuration & Plugins
 			},
 			intelephense = {
 				on_attach = function(client)
-					client.server_capabilities.workspaceSymbolProvider = false
+					client.server_capabilities.workspaceSymbolProvider = true
 				end,
 				settings = { php = { completion = { callSnippet = "Replace" } } },
 				cmd = { "intelephense", "--stdio" },

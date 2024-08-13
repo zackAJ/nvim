@@ -14,6 +14,7 @@ return { -- Highlight, edit, and navigate code
 			"blade",
 			"vimdoc",
 			"php",
+			"vue",
 			"javascript",
 			"html",
 		},
