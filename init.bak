@@ -1,9 +1,0 @@
-call plug#begin()
-
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
-" or                                , { 'branch': '0.1.x' }
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-call plug#end()
