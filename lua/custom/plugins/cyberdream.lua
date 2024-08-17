@@ -22,7 +22,7 @@ return {
 						LineNrAbove = { fg = colors.cyan },
 						LineNr = { fg = colors.red },
 						LineNrBelow = { fg = colors.cyan },
-						GitSignsCurrentLineBlame = { fg = colors.cyan },
+						GitSignsCurrentLineBlame = { link = "", fg = colors.cyan },
 					}
 				end,
 				-- Override a color entirely
