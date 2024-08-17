@@ -1,5 +1,5 @@
 return {
-	"NStefan002/screenkey.nvim",
+	"zackAJ/screenkey.nvim",
 	lazy = false,
 	config = function()
 		local screenkey = require("screenkey")
@@ -19,6 +19,16 @@ return {
 				-- noautocmd = true,
 			},
 		})
-		vim.keymap.set("n", "<leader>tk", "<cmd>Screenkey toggle<CR>", { desc = "[T]oggle [S]creen[K]ey" })
+
+		local notify = require("notify")
+		local toggleScreenKey = function()
+			vim.cmd("Screenkey toggle")
+			-- change notification position
+			notify.setup({
+				top_down = screenkey.is_active(),
+			})
+		end
+
+		vim.keymap.set("n", "<leader>tk", toggleScreenKey, { desc = "[T]oggle [S]creen[K]ey" })
 	end,
 }

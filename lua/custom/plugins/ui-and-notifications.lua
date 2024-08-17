@@ -40,7 +40,8 @@ return {
 			-- notifications
 			"rcarriga/nvim-notify",
 			config = function()
-				require("notify").setup({
+				local notify = require("notify")
+				notify.setup({
 					render = "compact",
 					timeout = 2000,
 					top_down = true,
@@ -48,9 +49,10 @@ return {
 			end,
 			keys = {
 				{
-					"<leader>dn",
+					"<leader>tn",
 					function()
-						require("notify").dismiss({ silent = true, pending = true })
+						local notify = require("notify")
+						notify.dismiss({ silent = true, pending = true })
 					end,
 					desc = notificationIcon .. "Dismiss all Notifications",
 				},
