@@ -43,7 +43,7 @@ return {
 				require("notify").setup({
 					render = "compact",
 					timeout = 2000,
-					top_down = false,
+					top_down = true,
 				})
 			end,
 			keys = {
