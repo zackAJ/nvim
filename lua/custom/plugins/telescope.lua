@@ -26,10 +26,13 @@ return {
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	},
 	config = function()
-		require("telescope").setup({
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
+
+		telescope.setup({
 			defaults = {
 				mappings = {
-					i = { ["<c-f>"] = require("telescope.actions").to_fuzzy_refine },
+					i = { ["<c-f>"] = actions.to_fuzzy_refine },
 				},
 			},
 			file_ignore_patterns = { "%.git/" },
@@ -66,17 +69,17 @@ return {
 			},
 		})
 
-		pcall(require("telescope").load_extension, "fzf")
-		pcall(require("telescope").load_extension, "ui-select")
-		pcall(require("telescope").load_extension, "dir")
-		pcall(require("telescope").load_extension, "whaler")
+		pcall(telescope.load_extension, "fzf")
+		pcall(telescope.load_extension, "ui-select")
+		pcall(telescope.load_extension, "dir")
+		pcall(telescope.load_extension, "whaler")
 
 		local builtin = require("telescope.builtin")
 		local findInDir = function()
-			require("telescope").extensions.dir.find_files({ no_ignore = true, hidden = true })
+			telescope.extensions.dir.find_files({ no_ignore = true, hidden = true })
 		end
 
-		local grepInDir = require("telescope").extensions.dir.live_grep
+		local grepInDir = telescope.extensions.dir.live_grep
 
 		local grepBuffer = function()
 			builtin.live_grep({
@@ -110,7 +113,7 @@ return {
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch cursor [W]ord" })
 		vim.keymap.set("n", "<leader>sf", builtin.current_buffer_fuzzy_find, { desc = "[F]uzzy [F]ind buffer" })
 		-- select workspace with whaler
-		vim.keymap.set("n", "<leader>fw", require("telescope").extensions.whaler.whaler)
+		vim.keymap.set("n", "<leader>fw", telescope.extensions.whaler.whaler)
 		-- files
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find buffer" })
 		vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "[R]ecent [F]iles" })
