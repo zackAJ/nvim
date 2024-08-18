@@ -1,5 +1,5 @@
 return {
-	"zackAJ/screenkey.nvim",
+	"NStefan002/screenkey.nvim",
 	lazy = false,
 	config = function()
 		local screenkey = require("screenkey")
@@ -22,7 +22,7 @@ return {
 
 		local notify = require("notify")
 		local toggleScreenKey = function()
-			vim.cmd("Screenkey toggle")
+			screenkey.toggle()
 			-- change notification position
 			notify.setup({
 				top_down = screenkey.is_active(),
