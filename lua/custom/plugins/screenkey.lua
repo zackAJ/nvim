@@ -3,6 +3,7 @@ return {
 	lazy = false,
 	config = function()
 		local screenkey = require("screenkey")
+		-- TODO fix position
 		screenkey.setup({
 			win_opts = {
 				row = vim.o.lines - vim.o.cmdheight - 1,

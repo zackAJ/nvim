@@ -56,13 +56,13 @@ return {
 				whaler = {
 					directories = {
 						{ path = "~/dev", alias = "dev" },
-						{ path = "~/dotfiles", alias = "dot" },
 					},
 					auto_file_explorer = false,
 					oneoff_directories = {
 						{ path = "~/.config", alias = "config" },
 						{ path = "~/.config/nvim", alias = "nvim" },
 						{ path = "~/notes", alias = "notes" },
+						{ path = "~/dotfiles", alias = "dot" },
 					},
 					file_explorer = "neotree",
 				},
