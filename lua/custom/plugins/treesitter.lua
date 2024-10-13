@@ -2,6 +2,10 @@ return { -- Highlight, edit, and navigate code
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	opts = {
+		matchup = {
+			enable = true,
+			disable = { "c", "ruby" },
+		},
 		ensure_installed = {
 			"bash",
 			"c",
@@ -36,7 +40,22 @@ return { -- Highlight, edit, and navigate code
 		require("nvim-treesitter.install").prefer_git = true
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-treesitter.configs").setup(opts)
+		local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
+		parser_config.blade = {
+			install_info = {
+				url = "https://github.com/deanrumsby/tree-sitter-blade",
+				files = { "src/parser.c", "src/scanner.c" },
+				branch = "main",
+			},
+			filetype = "blade",
+		}
+
+		vim.filetype.add({
+			pattern = {
+				[".*%.blade%.php"] = "blade",
+			},
+		})
 		-- There are additional nvim-treesitter modules that you can use to interact
 		-- with nvim-treesitter. You should go explore a few and see what interests you:
 		--

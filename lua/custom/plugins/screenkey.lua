@@ -10,7 +10,7 @@ return {
 				col = vim.o.columns - 1,
 				relative = "editor",
 				anchor = "SE",
-				width = 30,
+				width = 15,
 				height = 1,
 				border = "single",
 				title = "",

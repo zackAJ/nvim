@@ -64,28 +64,48 @@ return {
 				desc = "[F]ormat [b]uffer",
 			},
 		},
-		opts = {
-			notify_on_error = true,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true, php = true, vue = true, javascript = true }
-				return {
-					timeout_ms = 500,
-					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-				}
-			end,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
-			},
-		},
+		config = function()
+			local util = require("conform.util")
+			require("conform").setup({
+				notify_on_error = true,
+				format_on_save = function(bufnr)
+					-- Disable "format_on_save lsp_fallback" for languages that don't
+					-- have a well standardized coding style. You can add additional
+					-- languages here or re-enable it for the disabled ones.
+					local disable_filetypes =
+						{ c = true, cpp = true, php = true, vue = true, javascript = true, blade = true, html = true }
+					return {
+						timeout_ms = 500,
+						lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+					}
+				end,
+				formatters_by_ft = {
+					lua = { "stylua" },
+					blade = { "blade" },
+					-- Conform can also run multiple formatters sequentially
+					-- python = { "isort", "black" },
+					--
+					-- You can use a sub-list to tell conform to run *until* a formatter
+					-- is found.
+					-- javascript = { { "prettierd", "prettier" } },
+				},
+				formatters = {
+					blade = {
+						options = {
+							format_on_save = false,
+						},
+						meta = {
+							url = "https://github.com/shufo/blade-formatter",
+							description = "An opinionated blade template formatter for Laravel that respects readability.",
+						},
+						command = "/home/zackaj/.local/share/nvim/mason/bin/blade-formatter",
+						args = { "--stdin" },
+						stdin = true,
+						cwd = util.root_file({ "composer.json", "composer.lock" }),
+					},
+				},
+			})
+		end,
 	},
 
 	{ -- Autocompletion

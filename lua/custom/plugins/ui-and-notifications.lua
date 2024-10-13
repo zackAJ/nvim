@@ -44,7 +44,7 @@ return {
 				notify.setup({
 					render = "compact",
 					timeout = 2000,
-					top_down = true,
+					top_down = false,
 				})
 			end,
 			keys = {

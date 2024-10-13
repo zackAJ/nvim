@@ -178,7 +178,7 @@ return { -- LSP Configuration & Plugins
 					client.server_capabilities.diagnosticProvider = false
 					--
 				end,
-				filetypes = { "php" },
+				filetypes = { "php", "blade" },
 				settings = {
 					phpactor = {
 						language_server_phpstan = { enabled = false },
@@ -197,7 +197,7 @@ return { -- LSP Configuration & Plugins
 				end,
 				settings = { php = { completion = { callSnippet = "Replace" } } },
 				cmd = { "intelephense", "--stdio" },
-				filetypes = { "php" },
+				filetypes = { "php", "blade" },
 			},
 			tsserver = {
 				settings = {
