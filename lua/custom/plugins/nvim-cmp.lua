@@ -10,6 +10,7 @@ local M = {
 		"neovim/nvim-lspconfig",
 		"hrsh7th/cmp-nvim-lsp",
 		"onsails/lspkind.nvim",
+		"f3fora/cmp-spell",
 	},
 }
 
@@ -71,6 +72,17 @@ M.config = function()
 			{ name = "buffer" },
 			{ name = "path" },
 			{ name = "nvim_lsp" },
+			{
+				name = "spell",
+				option = {
+					keep_all_entries = false,
+					enable_in_context = function()
+						return true
+					end,
+					preselect_correct_word = true,
+				},
+				max_item_count = 3,
+			},
 		}),
 		formatting = {
 			format = function(entry, vim_item)

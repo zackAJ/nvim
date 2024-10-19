@@ -160,6 +160,12 @@ return {
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua",
+			"blade-formatter",
+			"json-lsp",
+			"jsonls",
+			"pint",
+			"css-lsp",
+			"cssls",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

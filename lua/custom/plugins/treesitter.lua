@@ -1,4 +1,4 @@
-return { 
+return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	opts = {
@@ -37,18 +37,12 @@ return {
 
 		parser_config.blade = {
 			install_info = {
-				url = "https://github.com/deanrumsby/tree-sitter-blade",
-				files = { "src/parser.c", "src/scanner.c" },
+				url = "https://github.com/EmranMR/tree-sitter-blade",
+				files = { "src/parser.c" },
 				branch = "main",
 			},
 			filetype = "blade",
 		}
-
-		vim.filetype.add({
-			pattern = {
-				[".*%.blade%.php"] = "blade",
-			},
-		})
 		--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
