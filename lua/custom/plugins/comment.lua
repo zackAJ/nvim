@@ -13,6 +13,8 @@ return {
 				{ "gb", group = "Comment blockwise" },
 				{ "gbc", desc = "Comment toggle current block" },
 			})
+
+		vim.keymap.set("n", "<leader>td", "<cmd>TodoTelescope<CR>", { desc = "[T]o[d]o" })
 		end,
 	},
 }

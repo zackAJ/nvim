@@ -69,8 +69,8 @@ M.config = function()
 		sources = cmp.config.sources({
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
-			{ name = "buffer" },
-			{ name = "path" },
+			{ name = "buffer", max_item_count = 3 },
+			{ name = "path",max_item_count = 5  },
 			{ name = "nvim_lsp" },
 			{
 				name = "spell",
