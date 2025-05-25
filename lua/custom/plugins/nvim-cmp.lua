@@ -70,7 +70,7 @@ M.config = function()
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "buffer", max_item_count = 3 },
-			{ name = "path",max_item_count = 5  },
+			{ name = "path", max_item_count = 5 },
 			{ name = "nvim_lsp" },
 			{
 				name = "spell",

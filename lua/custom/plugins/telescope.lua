@@ -56,6 +56,7 @@ return {
 				whaler = {
 					directories = {
 						{ path = "~/dev", alias = "dev" },
+						{ path = "~/dev/larapack/packages/zackaj", alias = "packages" },
 					},
 					auto_file_explorer = false,
 					oneoff_directories = {

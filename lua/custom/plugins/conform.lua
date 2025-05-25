@@ -41,6 +41,7 @@ return {
 				lua = { "stylua" },
 				blade = { "bladeFormatter" },
 				php = { "pint" },
+				astro = { "prettier" },
 			},
 			formatters = {
 				bladeFormatter = {

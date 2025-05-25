@@ -84,7 +84,7 @@ return {
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 		local servers = {
-			tailwindcss = { filetypes = { "html", "blade", "vue" } },
+			tailwindcss = { filetypes = { "html", "blade", "vue", "astro", "typescriptreact" } },
 			phpactor = {
 				cmd = { "phpactor", "language-server", "-vvv" },
 				on_attach = function(client)
@@ -111,14 +111,14 @@ return {
 					},
 				},
 			},
-			intelephense = {
-				on_attach = function(client)
-					client.server_capabilities.completionProvider = nil
-				end,
-				settings = { php = { completion = { callSnippet = "Replace" } } },
-				cmd = { "intelephense", "--stdio" },
-				filetypes = { "php", "blade" },
-			},
+			-- intelephense = {
+			-- 	on_attach = function(client)
+			-- 		client.server_capabilities.completionProvider = nil
+			-- 	end,
+			-- 	settings = { php = { completion = { callSnippet = "Replace" } } },
+			-- 	cmd = { "intelephense", "--stdio" },
+			-- 	filetypes = { "php", "blade" },
+			-- },
 			ts_ls = {
 				settings = {
 					ts_ls = {
@@ -135,7 +135,14 @@ return {
 						},
 					},
 				},
-				filetypes = { "typescript", "vue", "javascript", "javascriptreact", "typescriptreact" },
+				filetypes = {
+					"typescript",
+					"vue",
+					"javascript",
+					"javascriptreact",
+					"typescriptreact",
+					"typescript.tsx",
+				},
 			},
 			volar = {},
 			--
@@ -153,6 +160,42 @@ return {
 					},
 				},
 			},
+			gopls = {
+				settings = {
+					gofumpt = true,
+					codelenses = {
+						gc_details = false,
+						generate = true,
+						regenerate_cgo = true,
+						run_govulncheck = true,
+						test = true,
+						tidy = true,
+						upgrade_dependency = true,
+						vendor = true,
+					},
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
+					analyses = {
+						fieldalignment = true,
+						nilness = true,
+						unusedparams = true,
+						unusedwrite = true,
+						useany = true,
+					},
+					usePlaceholders = true,
+					completeUnimported = true,
+					staticcheck = true,
+					directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+					semanticTokens = true,
+				},
+			},
 		}
 
 		require("mason").setup()
@@ -166,6 +209,12 @@ return {
 			"pint",
 			"css-lsp",
 			"cssls",
+			"gopls",
+			-- "intelephense",
+			"phpactor",
+			"ts_ls",
+			"volar",
+			"tailwindcss",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
